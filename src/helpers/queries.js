@@ -14,30 +14,30 @@ function getShapeQuery4Target (targetClassIri) {
   CONSTRUCT {
     ?node_s ?node_p ?node_o .
     ?prop_s ?prop_p ?prop_o .
-    ?s sh:in ?list .
+    ?prop_s sh:in ?list .
     ?elt rdf:rest ?rest .
     ?elt rdf:first ?val .
   } WHERE {
-    GRAPH ?g {
       {
-        ?node_s sh:targetClass <${targetClassIri}> .
-        ?node_s ?node_p ?node_o .
-        ?prop_s ?prop_p ?prop_o .
-        FILTER(?prop_p != sh:in)
-        FILTER(?node_o = ?prop_s)
+        {
+          ?node_s sh:targetClass <${targetClassIri}> .
+          ?node_s ?node_p ?node_o .
+          ?prop_s ?prop_p ?prop_o .
+          FILTER(?prop_p != sh:in)
+          FILTER(?node_o = ?prop_s)
+        }
+        UNION
+        {
+          ?node_s sh:targetClass <${targetClassIri}> .
+          ?node_s ?node_p ?node_o .
+          ?prop_s ?prop_p ?prop_o .
+          ?prop_s sh:in ?list .
+          ?list rdf:rest* ?elt .
+          ?elt rdf:rest ?rest .
+          ?elt rdf:first ?val .
+          FILTER(?node_o = ?prop_s)
+        }
       }
-      UNION
-      {
-        ?node_s sh:targetClass <${targetClassIri}> .
-        ?node_s ?node_p ?node_o .
-        ?prop_s ?prop_p ?prop_o .
-        ?prop_s sh:in ?list .
-        ?list rdf:rest* ?elt .
-        ?elt rdf:rest ?rest .
-        ?elt rdf:first ?val .
-        FILTER(?node_o = ?prop_s)
-      }
-    }
   }`
 }
 
@@ -52,33 +52,33 @@ function getShapeQuery4Instance (instanceIri) {
   CONSTRUCT {
     ?node_s ?node_p ?node_o .
     ?prop_s ?prop_p ?prop_o .
-    ?node_s ?p ?o .
-    ?s sh:in ?list .
+    #?node_s ?p ?o .
+    ?prop_s sh:in ?list .
     ?elt rdf:rest ?rest .
     ?elt rdf:first ?val .
   } WHERE {
-    GRAPH ?g {
-      <${instanceIri}> rdf:type ?class .
-        ?node_s ?p ?o .
       {
-        ?node_s sh:targetClass ?class .
-        ?node_s ?node_p ?node_o .
-        ?prop_s ?prop_p ?prop_o .
-        FILTER(?prop_p != sh:in)
-        FILTER(?node_o = ?prop_s)
+        <${instanceIri}> rdf:type ?class .
+          #?node_s ?p ?o .
+        {
+          ?node_s sh:targetClass ?class .
+          ?node_s ?node_p ?node_o .
+          ?prop_s ?prop_p ?prop_o .
+          FILTER(?prop_p != sh:in)
+          FILTER(?node_o = ?prop_s)
+        }
+        UNION
+        {
+          ?node_s rdf:type ?class .
+          ?node_s ?node_p ?node_o .
+          ?prop_s ?prop_p ?prop_o .
+          ?prop_s sh:in ?list .
+          ?list rdf:rest* ?elt .
+          ?elt rdf:rest ?rest .
+          ?elt rdf:first ?val .
+          FILTER(?node_o = ?prop_s)
+        }
       }
-      UNION
-      {
-        ?node_s rdf:type ?class .
-        ?node_s ?node_p ?node_o .
-        ?prop_s ?prop_p ?prop_o .
-        ?prop_s sh:in ?list .
-        ?list rdf:rest* ?elt .
-        ?elt rdf:rest ?rest .
-        ?elt rdf:first ?val .
-        FILTER(?node_o = ?prop_s)
-      }
-    }
   }`
 }
 
