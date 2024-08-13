@@ -15,7 +15,7 @@
     "@comunica/query-sparql": "^3.2.0",
     "@popperjs/core": "^2.11.8",
     "@rdfjs/data-model": "^2.0.2",
-    "@ulb-darmstadt/shacl-form": "^1.4.3",
+    "@ulb-darmstadt/shacl-form": "^1.5.3",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
