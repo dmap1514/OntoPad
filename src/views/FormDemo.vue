@@ -9,7 +9,7 @@
   </div>
   <div>
     <strong>Shape of {{ resource_iri }}</strong>
-    (<a v-on:click="getShape">refresh</a>)
+    (<a v-on:click="this.getShape">refresh</a>)
     <form>
       <div class="form-group">
         <label for="sourceInput" class="">Turtle</label>
@@ -103,21 +103,23 @@ export default {
   methods: {
     async getResource () {
       this.subject = rdf.namedNode(this.resource_iri)
-      console.log('get resource: ' + this.resource_iri)
+      console.log('Form: get resource: ' + this.resource_iri)
       const resourceData = await this.store.getResource(this.resource_iri)
       this.dataModel = (await quadStreamToStore(resourceData)).store
     },
     async getShape () {
-      console.log('Get shape for target class')
+      console.log('Form: Get shape for target class')
       let shapeData = []
+      console.log(getShapeQuery4Target(this.resource_iri))
       const result = await this.store.sendQuery({query: getShapeQuery4Target(this.resource_iri)}) // if class
+      console.log('Form: result:' + result)
       if (result.resultType === 'quads') {
         const quadStream = await result.execute()
         shapeData = await quadStream.toArray()
       }
 
       if (shapeData.length < 1) {
-        console.log('Get shape for class of current resource')
+        console.log('Form: Get shape for class of current resource')
         const result = await this.store.sendQuery({query: getShapeQuery4Instance(this.resource_iri)}) // if class
         if (result.resultType === 'quads') {
           const quadStream = await result.execute()
@@ -126,7 +128,7 @@ export default {
       }
 
       if (shapeData.length < 1) {
-        console.log('Use default shape')
+        console.log('Form: Use default shape')
         this.shapeTurtle = dedent(`
           @prefix sh: <http://www.w3.org/ns/shacl#> .
           @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -147,7 +149,7 @@ export default {
               sh:maxCount 1 ;
             ] .`)
       } else {
-        console.log('Use found shape')
+        console.log('Form: Use found shape')
         this.shapeTurtle = await this.serialize(shapeData, { format: 'text/turtle', prefixes: this.prefixes })
       }
     },
