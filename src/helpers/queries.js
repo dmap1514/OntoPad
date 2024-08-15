@@ -12,7 +12,8 @@ function getShapeQuery4Target (targetClassIri) {
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   CONSTRUCT {
-    ?node_s ?node_p ?node_o .
+    ?node_s ?node_p ?node_o ;
+      a sh:NodeShape .
     ?prop_s ?prop_p ?prop_o .
     ?prop_s sh:in ?list .
     ?elt rdf:rest ?rest .
@@ -50,16 +51,15 @@ function getShapeQuery4Instance (instanceIri) {
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   CONSTRUCT {
-    ?node_s ?node_p ?node_o .
+    ?node_s ?node_p ?node_o ;
+      a sh:NodeShape .
     ?prop_s ?prop_p ?prop_o .
     #?node_s ?p ?o .
     ?prop_s sh:in ?list .
     ?elt rdf:rest ?rest .
     ?elt rdf:first ?val .
   } WHERE {
-      {
         <${instanceIri}> rdf:type ?class .
-          #?node_s ?p ?o .
         {
           ?node_s sh:targetClass ?class .
           ?node_s ?node_p ?node_o .
@@ -78,7 +78,6 @@ function getShapeQuery4Instance (instanceIri) {
           ?elt rdf:first ?val .
           FILTER(?node_o = ?prop_s)
         }
-      }
   }`
 }
 
