@@ -13,6 +13,9 @@
             @prefix ex: <http://example.org/> .
             @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
             @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+            @prefix schema: <http://schema.org/> .
+            @prefix sh: <http://www.w3.org/ns/shacl#> .
+            @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
             graph ex: {
               <http://example.org/some> a rdf:Class .
               <http://example.org/bla> a <http://example.org/some> ;
@@ -24,6 +27,40 @@
               ex:Sascha a foaf:Person ;
                 foaf:name "Sascha" ;
                 foaf:knows ex:Norman, ex:Natanael .
+              ex:PersonShape a sh:NodeShape ;
+                rdfs:label "A NodeShape for persons"@en ;
+                sh:targetClass foaf:Person ;
+                sh:property [
+                  sh:path foaf:forname ;
+                  sh:minCount 1 ;
+                  sh:maxCount 4 ;
+                  sh:minLength 1 ;
+                  sh:maxLength 20 ;
+                  sh:datatype xsd:string ;
+                ] ;
+                sh:property [
+                  sh:path schema:birthDate ;
+                  rdfs:comment "The birthdate is expected as follows YYYY-MM-DD" ;
+                  sh:minCount 1 ;
+                  sh:maxCount 1 ;
+                  sh:datatype xsd:date ;
+                ] ;
+                sh:property [
+                  sh:path schema:affiliation ;
+                  sh:minCount 0 ;
+                  sh:nodeKind sh:IRI ;
+                ] ;
+                sh:property [
+                  sh:path foaf:knows ;
+                  sh:minCount 0 ;
+                  sh:nodeKind sh:IRI ;
+                ] ;
+                sh:property [
+                  sh:path foaf:lastname ;
+                  sh:minCount 1 ;
+                  sh:maxCount 2 ;
+                  sh:datatype xsd:string ;
+                ] .
             }
         - id: local_quitstore
           type: endpoint
