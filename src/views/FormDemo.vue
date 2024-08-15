@@ -8,43 +8,22 @@
     </dl>
   </div>
   <div>
-    <strong>Shape of {{ resource_iri }}</strong>
-    (<a v-on:click="this.getShape">refresh</a>)
-    <form>
-      <div class="form-group">
-        <label for="sourceInput" class="">Turtle</label>
-        <textarea id="sourceInput" class="form-control" v-model="this.shapeTurtle" rows="15"></textarea>
-      </div>
-      <button type="button" class="btn btn-outline-primary mb-0" @click="updateResource()">Submit</button>
-    </form>
-  </div>
-  <div>
     <!--
       SHACL shapes can be defined on the attribute 'data-shapes'
       or can be loaded by setting attribute 'data-shapes-url'
     -->
-    <!-- <shacl-form data-shapes="
-              @prefix sh: <http://www.w3.org/ns/shacl#> .
-              @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-              @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-              @prefix ex: <http://example.org#> .
-
-              ex:DefaultShape
-                a sh:NodeShape, rdfs:Class ;
-                sh:property [
-                  sh:name 'class' ;
-                  sh:path rdf:type ;
-                  sh:minCount 1 ;
-                  sh:maxCount 1 ;
-                ] ;
-                sh:property [
-                  sh:name 'label' ;
-                  sh:path rdfs:label ;
-                  sh:maxCount 1 ;
-                ] .
-
-    "></shacl-form> -->
-    <!-- <shacl-form data-shapes="{{ this.shapeTurtle }}"></shacl-form> -->
+    <shacl-form v-bind:data-shapes="shapeTurtle"></shacl-form>
+  </div>
+  <div>
+    <strong>Shape of {{ resource_iri }}</strong>
+    (<a v-on:click="this.getShape">refresh</a>)
+    <form>
+      <div class="form-group">
+        <label for="sourceInput" class="">Debut-Turtle-View</label>
+        <textarea id="sourceInput" class="form-control" v-model="this.shapeTurtle" rows="15"></textarea>
+      </div>
+      <button type="button" class="btn btn-outline-primary mb-0" @click="updateResource()">Submit</button>
+    </form>
   </div>
 </template>
 
@@ -74,17 +53,37 @@ export default {
     Term
   },
   mounted () {
-    this.getResource()
+    this.getResource();
   },
   watch: {
     resource_iri (value) {
       this.getResource()
+    },
+    resource_iri (value) {
+      this.getShape()
     }
   },
   data () {
     return {
       dataModel: {},
-      shapeTurtle: '',
+      shapeTurtle: `@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org#> .
+
+ex:DefaultShape
+  a sh:NodeShape, rdfs:Class ;
+  sh:property [
+    sh:name 'class' ;
+    sh:path rdf:type ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:name 'label' ;
+    sh:path rdfs:label ;
+    sh:maxCount 1 ;
+  ] .`,
       subject: rdf.namedNode(''),
     }
   },
@@ -123,34 +122,36 @@ export default {
         const result = await this.store.sendQuery({query: getShapeQuery4Instance(this.resource_iri)}) // if class
         if (result.resultType === 'quads') {
           const quadStream = await result.execute()
+          console.log('Form: QuadStream')
+          console.log(quadStream)
           shapeData = await quadStream.toArray()
         }
       }
 
       if (shapeData.length < 1) {
         console.log('Form: Use default shape')
-        this.shapeTurtle = dedent(`
-          @prefix sh: <http://www.w3.org/ns/shacl#> .
-          @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-          @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-          @prefix ex: <http://example.org#> .
+        this.shapeTurtle = `@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org#> .
 
-          ex:DefaultShape
-            a sh:NodeShape, rdfs:Class ;
-            sh:property [
-              sh:name 'class' ;
-              sh:path rdf:type ;
-              sh:minCount 1 ;
-              sh:maxCount 1 ;
-            ] ;
-            sh:property [
-              sh:name 'label' ;
-              sh:path rdfs:label ;
-              sh:maxCount 1 ;
-            ] .`)
+ex:DefaultShape
+  a sh:NodeShape, rdfs:Class ;
+  sh:property [
+    sh:name 'class' ;
+    sh:path rdf:type ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:name 'label' ;
+    sh:path rdfs:label ;
+    sh:maxCount 1 ;
+  ] .`
       } else {
         console.log('Form: Use found shape')
-        this.shapeTurtle = await this.serialize(shapeData, { format: 'text/turtle', prefixes: this.prefixes })
+        var ttl_string = await this.serialize(shapeData, { format: 'text/turtle', prefixes: this.prefixes })
+        this.shapeTurtle = ttl_string.replaceAll("\"", "'")
       }
     },
     selectResource (resourceIri) {
