@@ -20,10 +20,10 @@ import 'splitpanes/dist/splitpanes.css'
         <pane size="30">
           <splitpanes horizontal style="height: 80vh">
             <pane size="30">
-              <GraphList/>
+              <GraphList :graph_iri="graph_iri" :selectGraph="(iri) => {useSelectionStore().changeGraphIri(iri); useSelectionStore().changeResourceIri(iri)}" />
             </pane>
             <pane size="70">
-              <ClassList/>
+              <ClassList :class_iri="resource_iri" :selectClass="(iri) => {useSelectionStore().changeResourceIri(iri)}" />
             </pane>
           </splitpanes>
         </pane>
@@ -51,6 +51,7 @@ import 'splitpanes/dist/splitpanes.css'
 <script>
 import { mapState } from 'pinia'
 import { useRdfStore } from './stores/rdf'
+import { useSelectionStore } from './stores/selection'
 
 export default {
   name: 'App',
@@ -60,6 +61,7 @@ export default {
   },
   computed: {
     ...mapState(useRdfStore, {store_ready: store => store.ready}),
+    ...mapState(useSelectionStore, ['graph_iri', 'resource_iri'])
   }
 }
 

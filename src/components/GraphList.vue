@@ -1,6 +1,6 @@
 <template>
   <div>
-    <QueryResultList title="Graph List" search query="select distinct ?graph { graph ?graph {?s ?p ?o}} order by ?graph" query-quads select-variable="graph" ref="classList" :add="() => {add_graph_modal.show()}" :selectResource="(graphIri) => {select(graphIri)}" :activeResource="graph_iri"/>
+    <QueryResultList title="Graph List" search query="select distinct ?graph { graph ?graph {?s ?p ?o}} order by ?graph" query-quads select-variable="graph" ref="classList" :add="() => {add_graph_modal.show()}" :selectResource="selectGraph" :activeResource="graph_iri" />
     <div class="modal fade" ref="add_graph" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" size="lg">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -31,7 +31,6 @@
 <script>
 import { mapState } from 'pinia'
 import { useRdfStore } from '../stores/rdf'
-import { useSelectionStore } from '../stores/selection'
 import { Modal } from 'bootstrap'
 import rdf from '@rdfjs/data-model'
 
@@ -42,12 +41,15 @@ export default {
   name: 'GraphList',
   setup () {
     const store = useRdfStore();
-    const selection = useSelectionStore();
-    return { store, selection }
+    return { store }
   },
   components: {
     TermInput,
     QueryResultList
+  },
+  props: {
+    graph_iri: String,
+    selectGraph: Function
   },
   data () {
     return {
@@ -59,14 +61,7 @@ export default {
   mounted() {
     this.add_graph_modal = new Modal(this.$refs.add_graph)
   },
-  computed: {
-    ...mapState(useSelectionStore, ['graph_iri'])
-  },
   methods: {
-    select (graph) {
-      this.selection.changeGraphIri(graph)
-      this.selection.changeResourceIri(graph)
-    },
     async add_graph () {
       const newGraphData = [rdf.quad(this.new_graph_iri, rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'), rdf.namedNode('http://www.w3.org/2000/01/rdf-schema#Graph'))]
       console.log(this.new_graph_iri)

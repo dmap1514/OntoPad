@@ -89,8 +89,6 @@ export default {
     select (resource) {
       if (this.selectResource) {
         this.selectResource(resource)
-      } else {
-        this.selection.changeResourceIri(resource)
       }
     },
     async updateList () {
