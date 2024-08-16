@@ -17,14 +17,15 @@ export const useRdfStore = defineStore('rdf', () => {
 
   async function sendQuery (payload) {
     /**
-    Query for quads (construct query)
+    Query for quads or bindings (construct query)
      payload can be:
      a string: which is the query
      an object with the properties
      - query: which is the query
      - defaultGraph: to query a specific graph or a set of graphs
-     graph can be:
+     defaultGraph can be:
      - specified as a list of graphs
+     - the string 'quads' if graph patterns are defined in the query where part
      - can be undefined to use the current system selected graph
      */
     let defaultGraph
