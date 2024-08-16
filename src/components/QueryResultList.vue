@@ -99,10 +99,9 @@ export default {
       const result = await this.store.sendQuery({ query: this.query, defaultGraph: _defaultGraph })
       if (result.resultType === 'bindings') {
         const bindingsStream = await result.execute()
-        this.resources = []
-        for await (const bindings of bindingsStream) {
-          this.resources.push(bindings.get(this.selectVariable).value)
-        }
+        this.resources = await Array.fromAsync(bindingsStream, (bindings, index) => {
+          return bindings.get(this.selectVariable).value
+        })
       }
     },
     shortenIri (resource) {
