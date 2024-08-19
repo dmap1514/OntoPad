@@ -1,30 +1,37 @@
 <template>
-  <div>
-    <dl>
-      <dt>IRI</dt>
-      <dd>{{ resource_iri }}</dd>
-      <dt>Type</dt>
-      <dd><Term v-model:term="res_type" @click="selectResource"/></dd>
-    </dl>
-  </div>
-  <div>
-    <!--
-      SHACL shapes can be defined on the attribute 'data-shapes'
-      or can be loaded by setting attribute 'data-shapes-url'
-    -->
-    <shacl-form v-bind:data-shapes="shapeTurtle"></shacl-form>
-  </div>
-  <div>
-    <strong>Shape of {{ resource_iri }}</strong>
-    (<a v-on:click="this.getShape">refresh</a>)
-    <form>
-      <div class="form-group">
-        <label for="sourceInput" class="">Debut-Turtle-View</label>
-        <textarea id="sourceInput" class="form-control" v-model="this.shapeTurtle" rows="15"></textarea>
+  <splitpanes class="default-theme">
+    <pane size="70">
+      <div>
+        <dl>
+          <dt>IRI</dt>
+          <dd>{{ resource_iri }}</dd>
+          <dt>Type</dt>
+          <dd><Term v-model:term="res_type" @click="selectResource"/></dd>
+        </dl>
       </div>
-      <button type="button" class="btn btn-outline-primary mb-0" @click="updateResource()">Submit</button>
-    </form>
-  </div>
+      <div>
+        <!--
+          SHACL shapes can be defined on the attribute 'data-shapes'
+          or can be loaded by setting attribute 'data-shapes-url'
+        -->
+        <shacl-form v-bind:data-shapes="shapeTurtle"></shacl-form>
+      </div>
+      <div>
+        <strong>Shape of {{ resource_iri }}</strong>
+        (<a v-on:click="this.getShape">refresh</a>)
+        <form>
+          <div class="form-group">
+            <label for="sourceInput" class="">Debug-Turtle-View</label>
+            <textarea id="sourceInput" class="form-control" v-model="this.shapeTurtle" rows="15"></textarea>
+          </div>
+          <button type="button" class="btn btn-outline-primary mb-0" @click="updateResource()">Submit</button>
+        </form>
+      </div>
+    </pane>
+    <pane size="30">
+      <InstanceList style="height:80vh; overflow-y:scroll;" />
+    </pane>
+  </splitpanes>
 </template>
 
 <script>
@@ -37,10 +44,11 @@ import { Store, StreamParser, Parser, Writer } from 'n3'
 import { registerPlugin } from '@ulb-darmstadt/shacl-form'
 import { getShapeQuery4Target, getShapeQuery4Instance } from '../helpers/queries'
 import { quadStreamToStore } from '../helpers/rdf-parse'
+import { Splitpanes, Pane } from 'splitpanes'
 // import { LeafletPlugin } from '@ulb-darmstadt/shacl-form/plugins/leaflet.js'
 // import * as jsonld from 'jsonld'
 import rdf from '@rdfjs/data-model'
-import dedent from 'dedent-js'
+import InstanceList from '@/components/InstanceList.vue'
 
 export default {
   name: 'FormDemo',
@@ -50,7 +58,10 @@ export default {
     return { store, selection }
   },
   components: {
-    Term
+    Term,
+    InstanceList,
+    Splitpanes,
+    Pane
   },
   mounted () {
     this.getResource();
