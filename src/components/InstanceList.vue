@@ -4,7 +4,7 @@ import QueryResultList from './QueryResultList.vue'
 </script>
 
 <template>
-  <QueryResultList title="Instance List" search :query="'select distinct ?instance { ?instance a <' + resource_iri + '> } order by ?instance'" select-variable="instance" itemClass="py-2" ref="instanceList" :activeResource="resource_iri" :selectResource="(iri) => {useSelectionStore().changeResourceIri(iri)}"  />
+  <QueryResultList title="Instance List" search :query="'select distinct ?instance { ?instance a <' + resource_iri + '> } order by ?instance'" select-variable="instance" itemClass="py-2" ref="instanceList" :activeResource="resource_iri" :selectResource="(iri) => {useSelectionStore().changeResourceIri(iri, false)}"  />
 </template>
 
 <script>
