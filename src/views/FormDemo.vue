@@ -32,6 +32,7 @@ import { useSelectionStore } from '../stores/selection'
 import { Store, StreamParser, Parser, Writer } from 'n3'
 import { registerPlugin } from '@ulb-darmstadt/shacl-form'
 import { getShapeQuery4Target, getShapeQuery4Instance } from '../helpers/queries'
+import { defaultShape, defaultData } from '../helpers/rdf-data'
 import { quadStreamToStore, quadStreamToString } from '../helpers/rdf-parse'
 import { Splitpanes, Pane } from 'splitpanes'
 // import { LeafletPlugin } from '@ulb-darmstadt/shacl-form/plugins/leaflet.js'
@@ -66,29 +67,8 @@ export default {
   data () {
     return {
       dataModel: {},
-      dataTurtle: `@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-
-<http://example.org/Example> rdf:type rdf:Class ;
-<http://www.w3.org/2000/01/rdf-schema#label> 'Example resource'. `,
-      shapeTurtle: `@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix ex: <http://example.org#> .
-
-ex:DefaultShape
-  a sh:NodeShape, rdf:Class ;
-  sh:property [
-    sh:name 'class' ;
-    sh:path rdf:type ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-  ] ;
-  sh:property [
-    sh:name 'label' ;
-    sh:path rdfs:label ;
-    sh:maxCount 1 ;
-  ] .`,
+      dataTurtle: defaultData,
+      shapeTurtle: defaultShape,
       subject: rdf.namedNode(''),
     }
   },
@@ -131,24 +111,7 @@ ex:DefaultShape
       
       if (shapeData.length < 1) {
         console.log('Form: Use default shape')
-        shapeTurtle = `@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix ex: <http://example.org#> .
-
-ex:DefaultShape
-  a sh:NodeShape, rdfs:Class ;
-  sh:property [
-    sh:name 'class' ;
-    sh:path rdf:type ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-  ] ;
-  sh:property [
-    sh:name 'label' ;
-    sh:path rdfs:label ;
-    sh:maxCount 1 ;
-  ] .`
+        shapeTurtle = defaultShape
       } else {
         console.log('Form: Use found shape')
         let data_string = ""
