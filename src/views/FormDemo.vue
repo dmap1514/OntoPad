@@ -14,7 +14,7 @@
           SHACL shapes can be defined on the attribute 'data-shapes'
           or can be loaded by setting attribute 'data-shapes-url'
         -->
-        <shacl-form v-bind:data-shapes="shapeTurtle"></shacl-form>
+        <shacl-form v-bind:data-shapes="shapeTurtle" v-bind:data-values="dataTurtle"></shacl-form>
       </div>
     </pane>
     <pane size="30">
@@ -32,7 +32,7 @@ import { useSelectionStore } from '../stores/selection'
 import { Store, StreamParser, Parser, Writer } from 'n3'
 import { registerPlugin } from '@ulb-darmstadt/shacl-form'
 import { getShapeQuery4Target, getShapeQuery4Instance } from '../helpers/queries'
-import { quadStreamToStore } from '../helpers/rdf-parse'
+import { quadStreamToStore, quadStreamToString } from '../helpers/rdf-parse'
 import { Splitpanes, Pane } from 'splitpanes'
 // import { LeafletPlugin } from '@ulb-darmstadt/shacl-form/plugins/leaflet.js'
 // import * as jsonld from 'jsonld'
@@ -53,26 +53,31 @@ export default {
     Pane
   },
   mounted () {
-    this.getResource();
+    this.getFormData();
   },
   watch: {
     resource_iri (value) {
       this.getResource()
     },
     resource_iri (value) {
-      this.getShape()
+      this.getFormData()
     }
   },
   data () {
     return {
       dataModel: {},
+      dataTurtle: `@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://example.org/Example> rdf:type rdf:Class ;
+<http://www.w3.org/2000/01/rdf-schema#label> 'Example resource'. `,
       shapeTurtle: `@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org#> .
 
 ex:DefaultShape
-  a sh:NodeShape, rdfs:Class ;
+  a sh:NodeShape, rdf:Class ;
   sh:property [
     sh:name 'class' ;
     sh:path rdf:type ;
@@ -88,7 +93,7 @@ ex:DefaultShape
     }
   },
   computed: {
-    ...mapState(useSelectionStore, ['graph_iri', 'resource_iri']),
+    ...mapState(useSelectionStore, ['graph_iri', 'resource_iri', 'is_class']),
     res_type () {
       if (this.dataModel.getQuads !== undefined) {
         const res_type = this.dataModel.getQuads(rdf.namedNode(this.resource_iri), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'), null)[0]
@@ -102,35 +107,31 @@ ex:DefaultShape
   methods: {
     async getResource () {
       this.subject = rdf.namedNode(this.resource_iri)
-      console.log('Form: get resource: ' + this.resource_iri)
       const resourceData = await this.store.getResource(this.resource_iri)
-      this.dataModel = (await quadStreamToStore(resourceData)).store
+      const originalData = (await quadStreamToStore(resourceData)).store
+      return await quadStreamToString(originalData.match(), { format: 'application/n-triples', prefixes: this.prefixes_flat })
     },
-    async getShape () {
-      console.log('Form: Get shape for target class')
+    async getFormData () {
+      console.log('Form: Get form data')
       let shapeData = []
-      console.log(getShapeQuery4Target(this.resource_iri))
-      const result = await this.store.sendQuery({query: getShapeQuery4Target(this.resource_iri)}) // if class
-      console.log('Form: result:' + result)
+      let result = ""
+      
+      if (this.is_class) {
+        result = await this.store.sendQuery({query: await getShapeQuery4Target(this.resource_iri)})
+      } else {
+        result = await this.store.sendQuery({query: await getShapeQuery4Instance(this.resource_iri)})
+      }
+      
       if (result.resultType === 'quads') {
         const quadStream = await result.execute()
         shapeData = await quadStream.toArray()
       }
-
-      if (shapeData.length < 1) {
-        console.log('Form: Get shape for class of current resource')
-        const result = await this.store.sendQuery({query: getShapeQuery4Instance(this.resource_iri)}) // if class
-        if (result.resultType === 'quads') {
-          const quadStream = await result.execute()
-          console.log('Form: QuadStream')
-          console.log(quadStream)
-          shapeData = await quadStream.toArray()
-        }
-      }
-
+      let shapeTurtle = ""
+      let dataTurtle = ""
+      
       if (shapeData.length < 1) {
         console.log('Form: Use default shape')
-        this.shapeTurtle = `@prefix sh: <http://www.w3.org/ns/shacl#> .
+        shapeTurtle = `@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org#> .
@@ -150,9 +151,23 @@ ex:DefaultShape
   ] .`
       } else {
         console.log('Form: Use found shape')
-        var ttl_string = await this.serialize(shapeData, { format: 'text/turtle', prefixes: this.prefixes })
-        this.shapeTurtle = ttl_string.replaceAll("\"", "'")
+        let data_string = ""
+        
+        if (this.is_class == false) {
+          let instance_data = await this.getResource()
+          dataTurtle = instance_data.replaceAll("\"", "'")
+        }
+
+        let shape_string = await this.serialize(shapeData, { format: 'application/n-triples', prefixes: this.prefixes })
+        shapeTurtle = shape_string.replaceAll("\"", "'")
       }
+      // debug output TODO: remove when working
+      console.log('Form: Shape as turtle')
+      console.log(shapeTurtle)
+      console.log('Form: Instance as n-triples')
+      console.log(dataTurtle)
+      this.shapeTurtle = shapeTurtle
+      this.dataTurtle = dataTurtle
     },
     selectResource (resourceIri) {
       this.selection.changeResourceIri(resourceIri)
@@ -161,7 +176,6 @@ ex:DefaultShape
       return new Promise((resolve, reject) => {
         const rdfWriter = new Writer(serializerConfig)
         data.forEach((quad) => {
-          console.log(quad)
           rdfWriter.addQuad(quad)
         })
         rdfWriter.end((error, result) => {
