@@ -125,7 +125,7 @@ export default {
         shapeTurtle = shape_string.replaceAll("\"", "'")
       }
       // debug output TODO: remove when working
-      console.log('Form: Shape as turtle')
+      console.log('Form: Shape as n-triples')
       console.log(shapeTurtle)
       console.log('Form: Instance as n-triples')
       console.log(dataTurtle)
