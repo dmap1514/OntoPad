@@ -16,17 +16,6 @@
         -->
         <shacl-form v-bind:data-shapes="shapeTurtle"></shacl-form>
       </div>
-      <div>
-        <strong>Shape of {{ resource_iri }}</strong>
-        (<a v-on:click="this.getShape">refresh</a>)
-        <form>
-          <div class="form-group">
-            <label for="sourceInput" class="">Debug-Turtle-View</label>
-            <textarea id="sourceInput" class="form-control" v-model="this.shapeTurtle" rows="15"></textarea>
-          </div>
-          <button type="button" class="btn btn-outline-primary mb-0" @click="updateResource()">Submit</button>
-        </form>
-      </div>
     </pane>
     <pane size="30">
       <InstanceList style="height:80vh; overflow-y:scroll;" />
