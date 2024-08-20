@@ -14,7 +14,7 @@
           SHACL shapes can be defined on the attribute 'data-shapes'
           or can be loaded by setting attribute 'data-shapes-url'
         -->
-        <shacl-form v-bind:data-shapes="shapeTurtle" v-bind:data-values="dataTurtle"></shacl-form>
+        <shacl-form @change="getFormTurtle" ref="myform" data-submit-button data-generate-node-shape-reference data-show-node-ids v-bind:data-values="dataTurtle" v-bind:data-shapes="shapeTurtle"></shacl-form>
       </div>
     </pane>
     <pane size="30">
@@ -85,6 +85,13 @@ export default {
     }
   },
   methods: {
+    getFormTurtle (event) {
+      const form = this.$refs.myform
+      if (event.detail?.valid) {
+        const triples = form.serialize()
+        console.log('entered form data', triples)
+      }
+    },
     async getResource () {
       this.subject = rdf.namedNode(this.resource_iri)
       const resourceData = await this.store.getResource(this.resource_iri)
