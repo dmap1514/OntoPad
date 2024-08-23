@@ -103,27 +103,27 @@ export default {
       console.log('Form: Get form data')
       let shapeData = []
       let result = ""
-      
+
       if (this.is_class) {
         result = await this.store.sendQuery({query: await getShapeQuery4Target(this.resource_iri)})
       } else {
         result = await this.store.sendQuery({query: await getShapeQuery4Instance(this.resource_iri)})
       }
-      
+
       if (result.resultType === 'quads') {
         const quadStream = await result.execute()
         shapeData = await quadStream.toArray()
       }
       let shapeTurtle = ""
       let dataTurtle = ""
-      
+
       if (shapeData.length < 1) {
         console.log('Form: Use default shape')
         shapeTurtle = defaultShape
       } else {
         console.log('Form: Use found shape')
         let data_string = ""
-        
+
         if (this.is_class == false) {
           let instance_data = await this.getResource()
           dataTurtle = instance_data.replaceAll("\"", "'")
