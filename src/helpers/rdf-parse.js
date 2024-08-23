@@ -54,11 +54,3 @@ export async function quadStreamToString(quadStream, options) {
 
   return Buffer.concat(chunks).toString();
 }
-
-// from https://github.com/jeswr/rdf-dereference-store.js/blob/872301fefe1dfeafd6d5aacc12068966cb90e208/lib/index.ts#L14-L18
-// Takes a Stream of Quads as first argument
-export function quadStreamToStore(quadStream) {
-  const res = { store: new Store(), prefixes: {} }; //  as Record<string, string>
-  quadStream.on('prefix', (prefix, ns) => { res.prefixes[prefix] = typeof ns === 'string' ? ns : ns.value; });
-  return promisifyEventEmitter(res.store.import(quadStream), res);
-}

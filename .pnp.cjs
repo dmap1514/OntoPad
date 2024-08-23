@@ -47,6 +47,7 @@ const RAW_RUNTIME_STATE =
           ["n3", "npm:1.17.3"],\
           ["pinia", "virtual:f72e9c9c51cc36d8fb68775b655fad0d1ef137be742260300f2801b18b44616a65c3638519313cd53cbd70202a8107f75a4cb183e8c2f73d8c171bfc8a9a030d#npm:2.1.7"],\
           ["prettier", "npm:3.2.5"],\
+          ["rdf-dereference-store", "npm:1.3.2"],\
           ["rdf-sparql-builder", "https://github.com/white-gecko/rdf-sparql-builder.git#commit=d2c86c600c614fa50e651545af72341687fb8a9f"],\
           ["rdf-string", "npm:1.6.3"],\
           ["rdf-transform-triple-to-quad", "npm:2.0.1"],\
@@ -2356,6 +2357,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@comunica/actor-dereference-fallback", [\
+      ["npm:2.10.0", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/@comunica-actor-dereference-fallback-npm-2.10.0-11d6d1828b-10c0.zip/node_modules/@comunica/actor-dereference-fallback/",\
+        "packageDependencies": [\
+          ["@comunica/actor-dereference-fallback", "npm:2.10.0"],\
+          ["@comunica/bus-dereference", "npm:2.10.0"],\
+          ["@comunica/core", "npm:2.10.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:3.2.0", {\
         "packageLocation": "../../../../../.yarn/berry/cache/@comunica-actor-dereference-fallback-npm-3.2.0-c30b429a99-10c0.zip/node_modules/@comunica/actor-dereference-fallback/",\
         "packageDependencies": [\
@@ -2366,7 +2376,31 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@comunica/actor-dereference-file", [\
+      ["npm:2.10.0", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/@comunica-actor-dereference-file-npm-2.10.0-1dc609584b-10c0.zip/node_modules/@comunica/actor-dereference-file/",\
+        "packageDependencies": [\
+          ["@comunica/actor-dereference-file", "npm:2.10.0"],\
+          ["@comunica/bus-dereference", "npm:2.10.0"],\
+          ["@comunica/core", "npm:2.10.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@comunica/actor-dereference-http", [\
+      ["npm:2.10.2", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/@comunica-actor-dereference-http-npm-2.10.2-d0b5593708-10c0.zip/node_modules/@comunica/actor-dereference-http/",\
+        "packageDependencies": [\
+          ["@comunica/actor-dereference-http", "npm:2.10.2"],\
+          ["@comunica/bus-dereference", "npm:2.10.0"],\
+          ["@comunica/bus-http", "npm:2.10.2"],\
+          ["@comunica/core", "npm:2.10.0"],\
+          ["cross-fetch", "npm:4.0.0"],\
+          ["relative-to-absolute-iri", "npm:1.0.7"],\
+          ["stream-to-string", "npm:1.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:3.2.0", {\
         "packageLocation": "../../../../../.yarn/berry/cache/@comunica-actor-dereference-http-npm-3.2.0-e5e3fd1bb4-10c0.zip/node_modules/@comunica/actor-dereference-http/",\
         "packageDependencies": [\
@@ -2382,6 +2416,16 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@comunica/actor-dereference-rdf-parse", [\
+      ["npm:2.10.0", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/@comunica-actor-dereference-rdf-parse-npm-2.10.0-e4829ebc68-10c0.zip/node_modules/@comunica/actor-dereference-rdf-parse/",\
+        "packageDependencies": [\
+          ["@comunica/actor-dereference-rdf-parse", "npm:2.10.0"],\
+          ["@comunica/bus-dereference", "npm:2.10.0"],\
+          ["@comunica/bus-dereference-rdf", "npm:2.10.0"],\
+          ["@comunica/bus-rdf-parse", "npm:2.10.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:3.2.0", {\
         "packageLocation": "../../../../../.yarn/berry/cache/@comunica-actor-dereference-rdf-parse-npm-3.2.0-420f851794-10c0.zip/node_modules/@comunica/actor-dereference-rdf-parse/",\
         "packageDependencies": [\
@@ -5374,6 +5418,19 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@comunica/bus-dereference", [\
+      ["npm:2.10.0", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/@comunica-bus-dereference-npm-2.10.0-d33c8dde44-10c0.zip/node_modules/@comunica/bus-dereference/",\
+        "packageDependencies": [\
+          ["@comunica/bus-dereference", "npm:2.10.0"],\
+          ["@comunica/actor-abstract-mediatyped", "npm:2.10.0"],\
+          ["@comunica/actor-abstract-parse", "npm:2.10.0"],\
+          ["@comunica/context-entries", "npm:2.10.0"],\
+          ["@comunica/core", "npm:2.10.0"],\
+          ["@comunica/types", "npm:2.10.0"],\
+          ["readable-stream", "npm:4.5.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:3.2.0", {\
         "packageLocation": "../../../../../.yarn/berry/cache/@comunica-bus-dereference-npm-3.2.0-db072c4a5a-10c0.zip/node_modules/@comunica/bus-dereference/",\
         "packageDependencies": [\
@@ -5389,6 +5446,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@comunica/bus-dereference-rdf", [\
+      ["npm:2.10.0", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/@comunica-bus-dereference-rdf-npm-2.10.0-1796bbf72b-10c0.zip/node_modules/@comunica/bus-dereference-rdf/",\
+        "packageDependencies": [\
+          ["@comunica/bus-dereference-rdf", "npm:2.10.0"],\
+          ["@comunica/bus-dereference", "npm:2.10.0"],\
+          ["@comunica/bus-rdf-parse", "npm:2.10.0"],\
+          ["@comunica/core", "npm:2.10.0"],\
+          ["@rdfjs/types", "npm:1.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:3.2.0", {\
         "packageLocation": "../../../../../.yarn/berry/cache/@comunica-bus-dereference-rdf-npm-3.2.0-21c3fba346-10c0.zip/node_modules/@comunica/bus-dereference-rdf/",\
         "packageDependencies": [\
@@ -8311,6 +8379,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../.yarn/berry/cache/@types-n3-npm-1.16.4-6665807380-10c0.zip/node_modules/@types/n3/",\
         "packageDependencies": [\
           ["@types/n3", "npm:1.16.4"],\
+          ["@rdfjs/types", "npm:1.1.0"],\
+          ["@types/node", "npm:20.12.12"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:1.16.5", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/@types-n3-npm-1.16.5-e8a7795a16-10c0.zip/node_modules/@types/n3/",\
+        "packageDependencies": [\
+          ["@types/n3", "npm:1.16.5"],\
           ["@rdfjs/types", "npm:1.1.0"],\
           ["@types/node", "npm:20.12.12"]\
         ],\
@@ -14488,6 +14565,7 @@ const RAW_RUNTIME_STATE =
           ["n3", "npm:1.17.3"],\
           ["pinia", "virtual:f72e9c9c51cc36d8fb68775b655fad0d1ef137be742260300f2801b18b44616a65c3638519313cd53cbd70202a8107f75a4cb183e8c2f73d8c171bfc8a9a030d#npm:2.1.7"],\
           ["prettier", "npm:3.2.5"],\
+          ["rdf-dereference-store", "npm:1.3.2"],\
           ["rdf-sparql-builder", "https://github.com/white-gecko/rdf-sparql-builder.git#commit=d2c86c600c614fa50e651545af72341687fb8a9f"],\
           ["rdf-string", "npm:1.6.3"],\
           ["rdf-transform-triple-to-quad", "npm:2.0.1"],\
@@ -15141,6 +15219,64 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["rdf-dereference", [\
+      ["npm:3.0.0", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/rdf-dereference-npm-3.0.0-a43aafbe2b-10c0.zip/node_modules/rdf-dereference/",\
+        "packageDependencies": [\
+          ["rdf-dereference", "npm:3.0.0"],\
+          ["@comunica/actor-dereference-fallback", "npm:2.10.0"],\
+          ["@comunica/actor-dereference-file", "npm:2.10.0"],\
+          ["@comunica/actor-dereference-http", "npm:2.10.2"],\
+          ["@comunica/actor-dereference-rdf-parse", "npm:2.10.0"],\
+          ["@comunica/actor-http-fetch", "npm:2.10.2"],\
+          ["@comunica/actor-http-proxy", "npm:2.10.2"],\
+          ["@comunica/actor-rdf-parse-html", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-html-microdata", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-html-rdfa", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-html-script", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-jsonld", "npm:2.10.2"],\
+          ["@comunica/actor-rdf-parse-n3", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-rdfxml", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-shaclc", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-xml-rdfa", "npm:2.10.0"],\
+          ["@comunica/bus-dereference", "npm:2.10.0"],\
+          ["@comunica/bus-dereference-rdf", "npm:2.10.0"],\
+          ["@comunica/bus-http", "npm:2.10.2"],\
+          ["@comunica/bus-init", "npm:2.10.0"],\
+          ["@comunica/bus-rdf-parse", "npm:2.10.0"],\
+          ["@comunica/bus-rdf-parse-html", "npm:2.10.0"],\
+          ["@comunica/config-query-sparql", "npm:2.7.0"],\
+          ["@comunica/context-entries", "npm:2.10.0"],\
+          ["@comunica/core", "npm:2.10.0"],\
+          ["@comunica/mediator-combine-pipeline", "npm:2.10.0"],\
+          ["@comunica/mediator-combine-union", "npm:2.10.0"],\
+          ["@comunica/mediator-number", "npm:2.10.0"],\
+          ["@comunica/mediator-race", "npm:2.10.0"],\
+          ["@rdfjs/types", "npm:1.1.0"],\
+          ["process", "npm:0.11.10"],\
+          ["rdf-string", "npm:1.6.3"],\
+          ["stream-to-string", "npm:1.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["rdf-dereference-store", [\
+      ["npm:1.3.2", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/rdf-dereference-store-npm-1.3.2-e13bd3c610-10c0.zip/node_modules/rdf-dereference-store/",\
+        "packageDependencies": [\
+          ["rdf-dereference-store", "npm:1.3.2"],\
+          ["@rdfjs/types", "npm:1.1.0"],\
+          ["@types/n3", "npm:1.16.5"],\
+          ["asynciterator", "npm:3.9.0"],\
+          ["event-emitter-promisify", "npm:1.1.0"],\
+          ["n3", "npm:1.17.3"],\
+          ["rdf-dereference", "npm:3.0.0"],\
+          ["rdf-parse", "npm:3.0.0"],\
+          ["readable-stream", "npm:4.5.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["rdf-isomorphic", [\
       ["npm:1.3.1", {\
         "packageLocation": "../../../../../.yarn/berry/cache/rdf-isomorphic-npm-1.3.1-689c7b5af2-10c0.zip/node_modules/rdf-isomorphic/",\
@@ -15184,6 +15320,37 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../.yarn/berry/cache/rdf-parse-npm-2.3.3-693e59f159-10c0.zip/node_modules/rdf-parse/",\
         "packageDependencies": [\
           ["rdf-parse", "npm:2.3.3"],\
+          ["@comunica/actor-http-fetch", "npm:2.10.2"],\
+          ["@comunica/actor-http-proxy", "npm:2.10.2"],\
+          ["@comunica/actor-rdf-parse-html", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-html-microdata", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-html-rdfa", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-html-script", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-jsonld", "npm:2.10.2"],\
+          ["@comunica/actor-rdf-parse-n3", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-rdfxml", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-shaclc", "npm:2.10.0"],\
+          ["@comunica/actor-rdf-parse-xml-rdfa", "npm:2.10.0"],\
+          ["@comunica/bus-http", "npm:2.10.2"],\
+          ["@comunica/bus-init", "npm:2.10.0"],\
+          ["@comunica/bus-rdf-parse", "npm:2.10.0"],\
+          ["@comunica/bus-rdf-parse-html", "npm:2.10.0"],\
+          ["@comunica/config-query-sparql", "npm:2.7.0"],\
+          ["@comunica/core", "npm:2.10.0"],\
+          ["@comunica/mediator-combine-pipeline", "npm:2.10.0"],\
+          ["@comunica/mediator-combine-union", "npm:2.10.0"],\
+          ["@comunica/mediator-number", "npm:2.10.0"],\
+          ["@comunica/mediator-race", "npm:2.10.0"],\
+          ["@rdfjs/types", "npm:1.1.0"],\
+          ["readable-stream", "npm:4.5.2"],\
+          ["stream-to-string", "npm:1.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:3.0.0", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/rdf-parse-npm-3.0.0-d2fc64a75e-10c0.zip/node_modules/rdf-parse/",\
+        "packageDependencies": [\
+          ["rdf-parse", "npm:3.0.0"],\
           ["@comunica/actor-http-fetch", "npm:2.10.2"],\
           ["@comunica/actor-http-proxy", "npm:2.10.2"],\
           ["@comunica/actor-rdf-parse-html", "npm:2.10.0"],\

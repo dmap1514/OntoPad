@@ -1482,6 +1482,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@comunica/actor-dereference-fallback@npm:^2.0.2":
+  version: 2.10.0
+  resolution: "@comunica/actor-dereference-fallback@npm:2.10.0"
+  dependencies:
+    "@comunica/bus-dereference": "npm:^2.10.0"
+    "@comunica/core": "npm:^2.10.0"
+  checksum: 10c0/c1b4aea96034e5f34366fc9caecd2ba8536b65a5141f163778dbab8b568ac62cdb0ef1857f1cddca52aa259bc10b8879173d918191f7a8e4c101e93d6bbb1c4e
+  languageName: node
+  linkType: hard
+
 "@comunica/actor-dereference-fallback@npm:^3.2.0":
   version: 3.2.0
   resolution: "@comunica/actor-dereference-fallback@npm:3.2.0"
@@ -1489,6 +1499,30 @@ __metadata:
     "@comunica/bus-dereference": "npm:^3.2.0"
     "@comunica/core": "npm:^3.2.0"
   checksum: 10c0/f4ce39356edf307adecfa6c47da1313d9281124836517374ad55109ee3641367bf480f8677f364fd5559772371d1dce245be73f707520566abbf649a575ae279
+  languageName: node
+  linkType: hard
+
+"@comunica/actor-dereference-file@npm:^2.0.2":
+  version: 2.10.0
+  resolution: "@comunica/actor-dereference-file@npm:2.10.0"
+  dependencies:
+    "@comunica/bus-dereference": "npm:^2.10.0"
+    "@comunica/core": "npm:^2.10.0"
+  checksum: 10c0/def72fed7ce7df5e701005bec0196ba2b1bb388244526196874ee5f9a3952038ef12e5e5f89d3b5edb3cbe835c994bd1f9c9d6e4f1e0743d1ce9815d00ad3f63
+  languageName: node
+  linkType: hard
+
+"@comunica/actor-dereference-http@npm:^2.0.2":
+  version: 2.10.2
+  resolution: "@comunica/actor-dereference-http@npm:2.10.2"
+  dependencies:
+    "@comunica/bus-dereference": "npm:^2.10.0"
+    "@comunica/bus-http": "npm:^2.10.2"
+    "@comunica/core": "npm:^2.10.0"
+    cross-fetch: "npm:^4.0.0"
+    relative-to-absolute-iri: "npm:^1.0.7"
+    stream-to-string: "npm:^1.2.0"
+  checksum: 10c0/f9ffe7f532874c4994f5dc9c3acf9fc51a3902cc2492f6c273812ab2e46defca85541ec272b1f9fa1d53833081a68b7e3d06ab8505ef0c22e42b45985ceab4f4
   languageName: node
   linkType: hard
 
@@ -1503,6 +1537,17 @@ __metadata:
     relative-to-absolute-iri: "npm:^1.0.7"
     stream-to-string: "npm:^1.2.0"
   checksum: 10c0/e9bb8c891273348723b10ceaa65b1820c5763f537692185c5a9cf9372d2a016d86f2f404b39a1f4e4fea554b4081edfdc76c25c427eb9d6a6f4e50bf6ce38076
+  languageName: node
+  linkType: hard
+
+"@comunica/actor-dereference-rdf-parse@npm:^2.6.0":
+  version: 2.10.0
+  resolution: "@comunica/actor-dereference-rdf-parse@npm:2.10.0"
+  dependencies:
+    "@comunica/bus-dereference": "npm:^2.10.0"
+    "@comunica/bus-dereference-rdf": "npm:^2.10.0"
+    "@comunica/bus-rdf-parse": "npm:^2.10.0"
+  checksum: 10c0/32ff267895839656b46c33984e0649e3d041a5ef591b866bba3d4b8539c6a985ec2090828a0bccc624281d4e35c8f185ff114c24f994da6898f9d578073c4eea
   languageName: node
   linkType: hard
 
@@ -4205,7 +4250,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@comunica/actor-rdf-parse-shaclc@npm:^2.6.2":
+"@comunica/actor-rdf-parse-shaclc@npm:^2.6.0, @comunica/actor-rdf-parse-shaclc@npm:^2.6.2":
   version: 2.10.0
   resolution: "@comunica/actor-rdf-parse-shaclc@npm:2.10.0"
   dependencies:
@@ -4463,6 +4508,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@comunica/bus-dereference-rdf@npm:^2.0.2, @comunica/bus-dereference-rdf@npm:^2.10.0":
+  version: 2.10.0
+  resolution: "@comunica/bus-dereference-rdf@npm:2.10.0"
+  dependencies:
+    "@comunica/bus-dereference": "npm:^2.10.0"
+    "@comunica/bus-rdf-parse": "npm:^2.10.0"
+    "@comunica/core": "npm:^2.10.0"
+    "@rdfjs/types": "npm:*"
+  checksum: 10c0/c65ea3c97c50e0245f83eaed2c45b676c4ec904e7cb503e3ec3e3b644876270c3a2cb0e4f3af241da6220e4df3d8ee81db0c1f10ba58483c02ef3c731fd5657c
+  languageName: node
+  linkType: hard
+
 "@comunica/bus-dereference-rdf@npm:^3.2.0":
   version: 3.2.0
   resolution: "@comunica/bus-dereference-rdf@npm:3.2.0"
@@ -4472,6 +4529,20 @@ __metadata:
     "@comunica/core": "npm:^3.2.0"
     "@rdfjs/types": "npm:*"
   checksum: 10c0/7c274d985baaf8945669b7048c8d77455380704f04069122ac62b3edab079433f0475393244e453a56b8b247697770b8c7342345202a7af1365776d9de1ea76c
+  languageName: node
+  linkType: hard
+
+"@comunica/bus-dereference@npm:^2.0.2, @comunica/bus-dereference@npm:^2.10.0":
+  version: 2.10.0
+  resolution: "@comunica/bus-dereference@npm:2.10.0"
+  dependencies:
+    "@comunica/actor-abstract-mediatyped": "npm:^2.10.0"
+    "@comunica/actor-abstract-parse": "npm:^2.10.0"
+    "@comunica/context-entries": "npm:^2.10.0"
+    "@comunica/core": "npm:^2.10.0"
+    "@comunica/types": "npm:^2.10.0"
+    readable-stream: "npm:^4.4.2"
+  checksum: 10c0/260ce3a7ca1126627c6e5dbfc9b87bcd5be95bcca74a900997a48b032cd1086167ebfff1fc6afa5d67fc9657e7411933de7e087f673dafa840b887073d5abe73
   languageName: node
   linkType: hard
 
@@ -5060,7 +5131,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@comunica/context-entries@npm:^2.10.0":
+"@comunica/context-entries@npm:^2.10.0, @comunica/context-entries@npm:^2.8.1":
   version: 2.10.0
   resolution: "@comunica/context-entries@npm:2.10.0"
   dependencies:
@@ -7117,6 +7188,16 @@ __metadata:
     "@rdfjs/types": "npm:^1.1.0"
     "@types/node": "npm:*"
   checksum: 10c0/34486916aca38ea90a40da5c2dba9326ed8e7784bf986fc3231976334a3fb2b7080e05a0f4f29780b33d81f7349b472c24561e8fbe0630e299dfda116bdb30c6
+  languageName: node
+  linkType: hard
+
+"@types/n3@npm:^1.16.4":
+  version: 1.16.5
+  resolution: "@types/n3@npm:1.16.5"
+  dependencies:
+    "@rdfjs/types": "npm:^1.1.0"
+    "@types/node": "npm:*"
+  checksum: 10c0/5ed5978476936fdd65198634bbb741f598c08af2692d2217acf0d09849345091cf72fab7ceafaf8ea8e8513a27720753c9c851effbe82547b9d525b37d7fa800
   languageName: node
   linkType: hard
 
@@ -12556,6 +12637,7 @@ __metadata:
     n3: "npm:^1.17.3"
     pinia: "npm:^2.1.7"
     prettier: "npm:^3.2.5"
+    rdf-dereference-store: "npm:^1.3.2"
     rdf-sparql-builder: "git+https://github.com/white-gecko/rdf-sparql-builder#feaature/smartAddPatternsWithQuads"
     rdf-string: "npm:^1.6.3"
     rdf-transform-triple-to-quad: "npm:^2.0.1"
@@ -13115,6 +13197,64 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rdf-dereference-store@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "rdf-dereference-store@npm:1.3.2"
+  dependencies:
+    "@rdfjs/types": "npm:^1.1.0"
+    "@types/n3": "npm:^1.16.4"
+    asynciterator: "npm:^3.9.0"
+    event-emitter-promisify: "npm:^1.1.0"
+    n3: "npm:^1.17.3"
+    rdf-dereference: "npm:^3.0.0"
+    rdf-parse: "npm:^3.0.0"
+    readable-stream: "npm:^4.5.2"
+  checksum: 10c0/06faf08fa6840a16dfdc8d4171b307a768f062ba938261b2915b6c9809c4a4fa3eeb784371a64b054c28ac3eee471260bb9a14d04a751434a3ea32e1c836588e
+  languageName: node
+  linkType: hard
+
+"rdf-dereference@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "rdf-dereference@npm:3.0.0"
+  dependencies:
+    "@comunica/actor-dereference-fallback": "npm:^2.0.2"
+    "@comunica/actor-dereference-file": "npm:^2.0.2"
+    "@comunica/actor-dereference-http": "npm:^2.0.2"
+    "@comunica/actor-dereference-rdf-parse": "npm:^2.6.0"
+    "@comunica/actor-http-fetch": "npm:^2.0.1"
+    "@comunica/actor-http-proxy": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-html": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-html-microdata": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-html-rdfa": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-html-script": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-jsonld": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-n3": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-rdfxml": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-shaclc": "npm:^2.6.0"
+    "@comunica/actor-rdf-parse-xml-rdfa": "npm:^2.0.1"
+    "@comunica/bus-dereference": "npm:^2.0.2"
+    "@comunica/bus-dereference-rdf": "npm:^2.0.2"
+    "@comunica/bus-http": "npm:^2.0.1"
+    "@comunica/bus-init": "npm:^2.0.1"
+    "@comunica/bus-rdf-parse": "npm:^2.0.1"
+    "@comunica/bus-rdf-parse-html": "npm:^2.0.1"
+    "@comunica/config-query-sparql": "npm:^2.0.1"
+    "@comunica/context-entries": "npm:^2.8.1"
+    "@comunica/core": "npm:^2.0.1"
+    "@comunica/mediator-combine-pipeline": "npm:^2.0.1"
+    "@comunica/mediator-combine-union": "npm:^2.0.1"
+    "@comunica/mediator-number": "npm:^2.0.1"
+    "@comunica/mediator-race": "npm:^2.0.1"
+    "@rdfjs/types": "npm:*"
+    process: "npm:^0.11.10"
+    rdf-string: "npm:^1.6.0"
+    stream-to-string: "npm:^1.2.0"
+  bin:
+    rdf-dereference: bin/Runner.js
+  checksum: 10c0/bd05645679a771c57cd3298cc785c816649c2c273f44f01e940351075be05f286db458a6d845becf9a8fbabbcdd45cdbebddae9f89c00722631039191a76da50
+  languageName: node
+  linkType: hard
+
 "rdf-isomorphic@npm:^1.3.0":
   version: 1.3.1
   resolution: "rdf-isomorphic@npm:1.3.1"
@@ -13179,6 +13319,38 @@ __metadata:
     readable-stream: "npm:^4.3.0"
     stream-to-string: "npm:^1.2.0"
   checksum: 10c0/a70b86a1faff01773f52d2c5aff87a0706554d6d24bc43f286d01c4bf2839de3bfdad068e33d66603e445e2fd5c7999f85c94fdd544241b36604557232edab0e
+  languageName: node
+  linkType: hard
+
+"rdf-parse@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "rdf-parse@npm:3.0.0"
+  dependencies:
+    "@comunica/actor-http-fetch": "npm:^2.0.1"
+    "@comunica/actor-http-proxy": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-html": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-html-microdata": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-html-rdfa": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-html-script": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-jsonld": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-n3": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-rdfxml": "npm:^2.0.1"
+    "@comunica/actor-rdf-parse-shaclc": "npm:^2.6.2"
+    "@comunica/actor-rdf-parse-xml-rdfa": "npm:^2.0.1"
+    "@comunica/bus-http": "npm:^2.0.1"
+    "@comunica/bus-init": "npm:^2.0.1"
+    "@comunica/bus-rdf-parse": "npm:^2.0.1"
+    "@comunica/bus-rdf-parse-html": "npm:^2.0.1"
+    "@comunica/config-query-sparql": "npm:^2.0.1"
+    "@comunica/core": "npm:^2.0.1"
+    "@comunica/mediator-combine-pipeline": "npm:^2.0.1"
+    "@comunica/mediator-combine-union": "npm:^2.0.1"
+    "@comunica/mediator-number": "npm:^2.0.1"
+    "@comunica/mediator-race": "npm:^2.0.1"
+    "@rdfjs/types": "npm:*"
+    readable-stream: "npm:^4.3.0"
+    stream-to-string: "npm:^1.2.0"
+  checksum: 10c0/c85c1caed0772e69a3862ca6875c986ad44ab3d46744c6781e46395333f751b4f505ba490a983771d2eeddf791cae5fefb404fd1f3ff414a493962c009016335
   languageName: node
   linkType: hard
 

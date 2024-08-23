@@ -33,7 +33,8 @@ import { Store, StreamParser, Parser, Writer } from 'n3'
 import { registerPlugin } from '@ulb-darmstadt/shacl-form'
 import { getShapeQuery4Target, getShapeQuery4Instance } from '../helpers/queries'
 import { defaultShape, defaultData } from '../helpers/rdf-data'
-import { quadStreamToStore, quadStreamToString } from '../helpers/rdf-parse'
+import { quadStreamToString } from '../helpers/rdf-parse'
+import { streamToStore } from 'rdf-dereference-store';
 import { Splitpanes, Pane } from 'splitpanes'
 // import { LeafletPlugin } from '@ulb-darmstadt/shacl-form/plugins/leaflet.js'
 // import * as jsonld from 'jsonld'
@@ -95,7 +96,7 @@ export default {
     async getResource () {
       this.subject = rdf.namedNode(this.resource_iri)
       const resourceData = await this.store.getResource(this.resource_iri)
-      const originalData = (await quadStreamToStore(resourceData)).store
+      const originalData = (await streamToStore(resourceData)).store
       return await quadStreamToString(originalData.match(), { format: 'application/n-triples', prefixes: this.prefixes_flat })
     },
     async getFormData () {

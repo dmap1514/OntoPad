@@ -41,7 +41,8 @@ import { useSelectionStore } from '../stores/selection'
 import { useRdfStore } from '../stores/rdf'
 import { cloneDeep } from 'lodash';
 import draggable from "vuedraggable"
-import { quadStreamToString, quadStreamToStore, stringToStore } from '../helpers/rdf-parse'
+import { quadStreamToString, stringToStore } from '../helpers/rdf-parse'
+import { streamToStore } from 'rdf-dereference-store';
 import { diff_n3 } from '../helpers/n3-compare'
 import rdf from '@rdfjs/data-model'
 

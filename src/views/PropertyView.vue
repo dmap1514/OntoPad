@@ -27,7 +27,7 @@ import { Readable } from 'readable-stream'
 import { mapState } from 'pinia'
 import { useRdfStore } from '../stores/rdf'
 import { useSelectionStore } from '../stores/selection'
-import { quadStreamToStore } from '../helpers/rdf-parse'
+import { streamToStore } from 'rdf-dereference-store';
 import rdf from '@rdfjs/data-model'
 
 export default {
@@ -80,7 +80,7 @@ export default {
       this.subject = rdf.namedNode(this.resource_iri)
       console.log('get resource: ' + this.resource_iri)
       const resourceData = await this.store.getResource(this.resource_iri)
-      this.dataModel = (await quadStreamToStore(resourceData)).store
+      this.dataModel = (await streamToStore(resourceData)).store
     },
     selectResource (resourceIri) {
       this.selection.changeResourceIri(resourceIri)

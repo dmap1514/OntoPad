@@ -22,7 +22,8 @@ import { mapState } from 'pinia'
 import { useRdfStore } from '../stores/rdf'
 import { useSelectionStore } from '../stores/selection'
 import { usePrefixesStore } from '../stores/prefixes'
-import { quadStreamToString, quadStreamToStore, stringToStore } from '../helpers/rdf-parse'
+import { quadStreamToString, stringToStore } from '../helpers/rdf-parse'
+import { streamToStore } from 'rdf-dereference-store';
 import { diff_n3 } from '../helpers/n3-compare'
 
 export default {
@@ -54,7 +55,7 @@ export default {
     async getResource () {
       console.log('get resource')
       const resourceData = await this.store.getResource(this.resource_iri)
-      this.originalData = (await quadStreamToStore(resourceData)).store
+      this.originalData = (await streamToStore(resourceData)).store
       this.resourceSource = await quadStreamToString(this.originalData.match(), { format: 'text/turtle', prefixes: this.prefixes_flat })
     },
     async updateResource () {
