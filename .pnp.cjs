@@ -60,6 +60,7 @@ const RAW_RUNTIME_STATE =
           ["vue", "virtual:f72e9c9c51cc36d8fb68775b655fad0d1ef137be742260300f2801b18b44616a65c3638519313cd53cbd70202a8107f75a4cb183e8c2f73d8c171bfc8a9a030d#npm:3.4.23"],\
           ["vue-diagrams", "npm:1.0.1"],\
           ["vue-router", "virtual:f72e9c9c51cc36d8fb68775b655fad0d1ef137be742260300f2801b18b44616a65c3638519313cd53cbd70202a8107f75a4cb183e8c2f73d8c171bfc8a9a030d#npm:4.3.2"],\
+          ["vuedraggable", "virtual:f72e9c9c51cc36d8fb68775b655fad0d1ef137be742260300f2801b18b44616a65c3638519313cd53cbd70202a8107f75a4cb183e8c2f73d8c171bfc8a9a030d#npm:4.1.0"],\
           ["yaml", "npm:2.5.0"]\
         ],\
         "linkType": "SOFT"\
@@ -14500,6 +14501,7 @@ const RAW_RUNTIME_STATE =
           ["vue", "virtual:f72e9c9c51cc36d8fb68775b655fad0d1ef137be742260300f2801b18b44616a65c3638519313cd53cbd70202a8107f75a4cb183e8c2f73d8c171bfc8a9a030d#npm:3.4.23"],\
           ["vue-diagrams", "npm:1.0.1"],\
           ["vue-router", "virtual:f72e9c9c51cc36d8fb68775b655fad0d1ef137be742260300f2801b18b44616a65c3638519313cd53cbd70202a8107f75a4cb183e8c2f73d8c171bfc8a9a030d#npm:4.3.2"],\
+          ["vuedraggable", "virtual:f72e9c9c51cc36d8fb68775b655fad0d1ef137be742260300f2801b18b44616a65c3638519313cd53cbd70202a8107f75a4cb183e8c2f73d8c171bfc8a9a030d#npm:4.1.0"],\
           ["yaml", "npm:2.5.0"]\
         ],\
         "linkType": "SOFT"\
@@ -16099,6 +16101,15 @@ const RAW_RUNTIME_STATE =
           ["agent-base", "npm:7.1.1"],\
           ["debug", "virtual:c9e1a4b59e37cb479517edede3bf2093b28c0ca1a9d0e517f3c345075bd1e468980b94b4957e389116607ee7155441dfd7d09e19a4229d5d09bcf06244401590#npm:4.3.4"],\
           ["socks", "npm:2.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["sortablejs", [\
+      ["npm:1.14.0", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/sortablejs-npm-1.14.0-77f80432c4-10c0.zip/node_modules/sortablejs/",\
+        "packageDependencies": [\
+          ["sortablejs", "npm:1.14.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17799,6 +17810,29 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/typescript",\
           "typescript"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["vuedraggable", [\
+      ["npm:4.1.0", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/vuedraggable-npm-4.1.0-785593d488-10c0.zip/node_modules/vuedraggable/",\
+        "packageDependencies": [\
+          ["vuedraggable", "npm:4.1.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:f72e9c9c51cc36d8fb68775b655fad0d1ef137be742260300f2801b18b44616a65c3638519313cd53cbd70202a8107f75a4cb183e8c2f73d8c171bfc8a9a030d#npm:4.1.0", {\
+        "packageLocation": "./.yarn/__virtual__/vuedraggable-virtual-dbe82562bd/6/.yarn/berry/cache/vuedraggable-npm-4.1.0-785593d488-10c0.zip/node_modules/vuedraggable/",\
+        "packageDependencies": [\
+          ["vuedraggable", "virtual:f72e9c9c51cc36d8fb68775b655fad0d1ef137be742260300f2801b18b44616a65c3638519313cd53cbd70202a8107f75a4cb183e8c2f73d8c171bfc8a9a030d#npm:4.1.0"],\
+          ["@types/vue", null],\
+          ["sortablejs", "npm:1.14.0"],\
+          ["vue", "virtual:f72e9c9c51cc36d8fb68775b655fad0d1ef137be742260300f2801b18b44616a65c3638519313cd53cbd70202a8107f75a4cb183e8c2f73d8c171bfc8a9a030d#npm:3.4.23"]\
+        ],\
+        "packagePeers": [\
+          "@types/vue",\
+          "vue"\
         ],\
         "linkType": "HARD"\
       }]\

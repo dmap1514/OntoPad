@@ -34,6 +34,7 @@
     "vue": "^3.4.21",
     "vue-diagrams": "^1.0.1",
     "vue-router": "^4.3.0",
+    "vuedraggable": "^4.1.0",
     "yaml": "^2.5.0"
   },
   "devDependencies": {
