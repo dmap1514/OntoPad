@@ -21,7 +21,9 @@
               <http://example.org/bla> a <http://example.org/some> ;
                 rdfs:label "hi" .
               ex:Norman a foaf:Person ;
-                foaf:name "Norman" .
+                schema:birthDate "1981-01-01" ;
+                foaf:forname "Norman" ;
+                foaf:name "Radtke" . 
               ex:Natanael a foaf:Person ;
                 foaf:name "Natanael" .
               ex:Sascha a foaf:Person ;
@@ -56,7 +58,7 @@
                   sh:nodeKind sh:IRI ;
                 ] ;
                 sh:property [
-                  sh:path foaf:lastname ;
+                  sh:path foaf:name ;
                   sh:minCount 1 ;
                   sh:maxCount 2 ;
                   sh:datatype xsd:string ;
