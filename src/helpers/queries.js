@@ -13,6 +13,7 @@ function getShapeQuery4Target (targetClassIri) {
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   CONSTRUCT {
     ?node_s ?node_p ?node_o ;
+      sh:targetClass <${targetClassIri}> ;
       a sh:NodeShape .
     ?prop_s ?prop_p ?prop_o .
     ?prop_s sh:in ?list .
@@ -52,6 +53,7 @@ function getShapeQuery4Instance (instanceIri) {
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   CONSTRUCT {
     ?node_s ?node_p ?node_o ;
+      sh:targetClass ?class ;
       a sh:NodeShape .
     ?prop_s ?prop_p ?prop_o .
     #?node_s ?p ?o .
@@ -81,6 +83,15 @@ function getShapeQuery4Instance (instanceIri) {
   }`
 }
 
+function getResourceQuery (resourceIri) {
+  return `
+  CONSTRUCT {
+    <${resourceIri}> ?p ?o .
+  } WHERE {
+    <${resourceIri}> ?p ?o .
+  }`
+}
+
 function injectDefaultGraph(query, defaultGraph) {
   console.log(query)
   let altQuery = "select distinct ?instance from <http://default.com/> { ?instance a <http://example.org/Resource> } order by ?instance"
@@ -102,4 +113,4 @@ function injectDefaultGraph(query, defaultGraph) {
   return query
 }
 
-export { getShapeQuery4Target, getShapeQuery4Instance, injectDefaultGraph }
+export { getShapeQuery4Target, getShapeQuery4Instance, getResourceQuery, injectDefaultGraph }

@@ -14,7 +14,7 @@
           SHACL shapes can be defined on the attribute 'data-shapes'
           or can be loaded by setting attribute 'data-shapes-url'
         -->
-        <shacl-form @change="getFormTurtle" ref="myform" data-submit-button data-generate-node-shape-reference data-show-node-ids v-bind:data-values="dataTurtle" v-bind:data-shapes="shapeTurtle"></shacl-form>
+        <shacl-form @change="getFormTurtle" ref="myform" data-submit-button data-generate-node-shape-reference data-show-node-ids v-bind:data-values="dataTurtle" v-bind:data-shapes="shapeTurtle" v-bind:data-values-subject="dataSubject"></shacl-form>
       </div>
     </pane>
     <pane size="30">
@@ -31,7 +31,7 @@ import { useRdfStore } from '../stores/rdf'
 import { useSelectionStore } from '../stores/selection'
 import { Store, StreamParser, Parser, Writer } from 'n3'
 import { registerPlugin } from '@ulb-darmstadt/shacl-form'
-import { getShapeQuery4Target, getShapeQuery4Instance } from '../helpers/queries'
+import { getShapeQuery4Target, getShapeQuery4Instance, getResourceQuery } from '../helpers/queries'
 import { defaultShape, defaultData } from '../helpers/rdf-data'
 import { quadStreamToString } from '../helpers/rdf-parse'
 import { streamToStore } from 'rdf-dereference-store';
@@ -69,6 +69,7 @@ export default {
     return {
       dataModel: {},
       dataTurtle: defaultData,
+      dataSubject: "",
       shapeTurtle: defaultShape,
       subject: rdf.namedNode(''),
     }
@@ -96,25 +97,36 @@ export default {
     async getResource () {
       this.subject = rdf.namedNode(this.resource_iri)
       const resourceData = await this.store.getResource(this.resource_iri)
-      const originalData = (await streamToStore(resourceData)).store
+      const originalData = (await quadStreamToStore(resourceData)).store
       return await quadStreamToString(originalData.match(), { format: 'application/n-triples', prefixes: this.prefixes_flat })
+    },
+    async getInstance () {
+      var result = await this.store.sendQuery({query: await getResourceQuery(this.resource_iri)})
+      if (result.resultType === 'quads') {
+        const quadStream = await result.execute()
+        var instanceData = await quadStream.toArray()
+      }
+      var instance_string = await this.serialize(instanceData, { format: 'application/n-triples', prefixes: this.prefixes })
+      return instance_string.replaceAll("\"", "'")
     },
     async getFormData () {
       console.log('Form: Get form data')
       let shapeData = []
       let result = ""
+      let dataSubject = ""
 
       if (this.is_class) {
         result = await this.store.sendQuery({query: await getShapeQuery4Target(this.resource_iri)})
       } else {
         result = await this.store.sendQuery({query: await getShapeQuery4Instance(this.resource_iri)})
+        dataSubject = this.resource_iri
       }
 
       if (result.resultType === 'quads') {
         const quadStream = await result.execute()
         shapeData = await quadStream.toArray()
       }
-      let shapeTurtle = ""
+      let shapeTurtle = "" 
       let dataTurtle = ""
 
       if (shapeData.length < 1) {
@@ -125,7 +137,7 @@ export default {
         let data_string = ""
 
         if (this.is_class == false) {
-          let instance_data = await this.getResource()
+          let instance_data = await this.getInstance()
           dataTurtle = instance_data.replaceAll("\"", "'")
         }
 
@@ -137,7 +149,10 @@ export default {
       console.log(shapeTurtle)
       console.log('Form: Instance as n-triples')
       console.log(dataTurtle)
+      console.log('Form: dataSubject')
+      console.log(dataSubject)
       this.shapeTurtle = shapeTurtle
+      this.dataSubject = dataSubject
       this.dataTurtle = dataTurtle
     },
     selectResource (resourceIri) {
